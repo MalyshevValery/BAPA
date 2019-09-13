@@ -4,12 +4,13 @@
 #include <cuda_runtime.h>
 #include "headers/dev_array.h"
 #include "headers/block_2d.h"
+#include "headers/block_3d.h"
 #include <fstream>
 #include <ctime>
 #include <cstring>
 #include <thread>
 
-#define PLACEHOLDER 1000
+#define PLACEHOLDER 999
 using namespace std;
 
 int main(int argc, char** argv)
@@ -76,7 +77,7 @@ int main(int argc, char** argv)
         GPU_block_2d_fu(n,r,matrix);
     } else if (strcmp(type.c_str(), "block_3d") == 0) {
         cout << "3D block FU... ";
-        //block_3D_fu(n, r, matrix);
+        GPU_block_3d_fu(n, r, matrix);
     }
     clock_gettime(CLOCK_MONOTONIC, &finish);
     elapsed = (finish.tv_sec - start.tv_sec);
