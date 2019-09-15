@@ -21,6 +21,6 @@ endif()
 
 
 #Executables for projects
-add_executable(CUDA_FW cuda_fw.cu headers/dev_array.h headers/block_2d.h kernels/block_2d.cu headers/block_3d.h kernels/block_3d.cu)
+add_executable(CUDA_FW cuda_fw.cu headers/dev_array.h headers/block_2d.h kernels/block_2d.cu headers/block_3d.h kernels/block_3d.cu headers/block_3d_t2.h kernels/block_3d_t2.cu)
 add_executable(FW floyd_warshall.cpp)
 add_executable(GraphGen graphgen.cpp graphgen.cpp)

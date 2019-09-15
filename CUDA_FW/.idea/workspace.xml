@@ -14,10 +14,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b01083c-35e5-4762-ad66-c3ef7fba5a9f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/headers/block_3d_t2.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kernels/block_3d_t2.cu" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.." beforeDir="false" afterPath="$PROJECT_DIR$/.." afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernels/block_3d.cu" beforeDir="false" afterPath="$PROJECT_DIR$/kernels/block_3d.cu" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cuda_fw.cu" beforeDir="false" afterPath="$PROJECT_DIR$/cuda_fw.cu" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_CUDA_2D32.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_CUDA_3D32.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,8 +64,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="CMake Application.GraphGen">
-    <configuration name="CUDA_FW" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="graph.txt answer_cu.txt block_3d 32" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="GraphGen" TARGET_NAME="CUDA_FW" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="GraphGen" RUN_TARGET_NAME="CUDA_FW">
+  <component name="RunManager" selected="CMake Application.CUDA_FW">
+    <configuration name="CUDA_FW" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="graph.txt answer_cu.txt block_3d_t2 64 " WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="GraphGen" TARGET_NAME="CUDA_FW" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="GraphGen" RUN_TARGET_NAME="CUDA_FW">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -98,7 +102,7 @@
       <workItem from="1568101762612" duration="2813000" />
       <workItem from="1568106251828" duration="392000" />
       <workItem from="1568106653666" duration="54000" />
-      <workItem from="1568385604104" duration="10297000" />
+      <workItem from="1568385604104" duration="12481000" />
     </task>
     <servers />
   </component>

@@ -5,10 +5,12 @@
 #include "headers/dev_array.h"
 #include "headers/block_2d.h"
 #include "headers/block_3d.h"
+#include "headers/block_3d_t2.h"
 #include <fstream>
 #include <ctime>
 #include <cstring>
 #include <thread>
+#include <math.h>
 
 #define PLACEHOLDER 999
 using namespace std;
@@ -48,7 +50,12 @@ int main(int argc, char** argv)
             cout << "Device can't handle so many threads in block" << endl;
             cout << "Requested block size: " << r*r << endl;
             cout << "Max threads per block: " << prop->maxThreadsPerBlock << endl;
-            return 2;
+
+            cout << "Will attempt second level tailing" << endl;
+            if (strcmp(type.c_str(), "block_3d_t2") != 0) {
+                cout << "2nd level tailing require 3D block algorithm with 2nd level tailing" << endl;
+                return 2;
+            }
         }
         else
             cout << "Parameters fit the device" << endl;
@@ -78,6 +85,20 @@ int main(int argc, char** argv)
     } else if (strcmp(type.c_str(), "block_3d") == 0) {
         cout << "3D block FU... ";
         GPU_block_3d_fu(n, r, matrix);
+    }
+    else if (strcmp(type.c_str(), "block_t2") == 0) {
+        cout << "3D block FU with 2level tailing... ";
+        int r2_2 = (prop->maxThreadsPerBlock) / r / r;
+        int r2 = sqrt(r2_2);
+        if (r2 * r2 != r2_2){
+            cout << "Can't get integer size of second level tailing" << endl;
+            return -1;
+        }
+        GPU_block_3d_t2_fu(n, r, r2, matrix);
+    }
+    else{
+        cout << "No such type" << endl;
+        return -1;
     }
     clock_gettime(CLOCK_MONOTONIC, &finish);
     elapsed = (finish.tv_sec - start.tv_sec);
