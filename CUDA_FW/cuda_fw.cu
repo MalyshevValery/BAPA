@@ -74,11 +74,12 @@ int main(int argc, char** argv)
                 matrix[i * n + j] = PLACEHOLDER;
         }
     }
+
     clock_gettime(CLOCK_MONOTONIC, &finish);
     elapsed = (finish.tv_sec - start.tv_sec);
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
     cout << fixed << elapsed << "s" << endl;
-    clock_gettime(CLOCK_MONOTONIC, &start);
+
     if (strcmp(type.c_str(), "block_2d") == 0) {
         cout << "2D block FU... ";
         GPU_block_2d_fu(n,r,matrix);
@@ -95,16 +96,13 @@ int main(int argc, char** argv)
             return -1;
         }
         cout << "2nd level tailing size: " << r2 << endl;
+        cout << "3D block FU with 2nd level tailing... ";
         GPU_block_3d_t2_fu(n, r / r2, r2, matrix);
     }
     else{
         cout << "No such type" << endl;
         return -1;
     }
-    clock_gettime(CLOCK_MONOTONIC, &finish);
-    elapsed = (finish.tv_sec - start.tv_sec);
-    elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-    cout << fixed << elapsed << "s" << endl;
 
     ofstream fout(argv[2]);
     cout << "Writing... ";

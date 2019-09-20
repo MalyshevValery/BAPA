@@ -19,6 +19,7 @@ echo "Block size: " $6
 
 for ((i=1; i<=$3; i++))
 do
+    echo ""
     echo "Run: " $i
     "${DIR_WITH_EXE}${4}" "graph.txt" "answer.txt" $5 $6
 done

@@ -6,7 +6,7 @@
 using namespace std;
 
 #define MAX_WEIGHT 100
-#define OUT_THR 1000
+#define OUT_THR 10
 
 
 // A function to generate random graph.
@@ -20,6 +20,7 @@ int **GenerateRandGraphs(int NOE, int NOV) {
     i = 0;
     // Build a connection between two random vertex.
     cout.precision(2);
+    int counter = 0;
     while (i < NOE) {
         int x = rand() % NOV;
         int y = rand() % NOV;
@@ -29,8 +30,10 @@ int **GenerateRandGraphs(int NOE, int NOV) {
             continue;
         matrix[x][y] = w;
         i++;
+        counter++;
 
-        if (i%OUT_THR == 0){
+        if (counter >= NOE / OUT_THR){
+            counter = 0;
             cout << fixed << 100.0 * i / NOE << "%" << endl;
         }
     }

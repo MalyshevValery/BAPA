@@ -6,7 +6,9 @@
 #include <iostream>
 #include "cuda_runtime.h"
 #include "../headers/dev_array.h"
+#include <chrono>
 #include "../headers/block_3d_t2.h"
+#include "../../../../../../../usr/include/c++/6/chrono"
 #include <stdlib.h>
 
 using namespace std;
@@ -74,10 +76,16 @@ void GPU_block_3d_t2_fu(int n, int r, int r2, int *matrix) {
     //copy data to gpu
     dev_array<int> d_matrix(n * n);
     d_matrix.set(matrix, n * n);
+
+    auto start_hr = std::chrono::high_resolution_clock::now();
     for (int nk = 0; nk < nn; nk++) {
         I_block_3d_t2_kernel << < I_blockPerGrid, threadsPerBlock >> >(n, r2, nk * r * r2, (nk + 1) * r * r2, d_matrix.getData());
         SD_block_3d_t2_kernel << < SD_blockPerGrid, threadsPerBlock >> > (n, nk, r, r2, d_matrix.getData());
         DD_block_3d_t2_kernel << < DD_blockPerGrid, threadsPerBlock >> > (n, nk, r, r2, d_matrix.getData());
     }
+    auto end_hr = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end_hr - start_hr;
+    cout << fixed << diff.count() * 1000 << "(ms)" << endl;
+
     d_matrix.get(matrix, n * n);
 }

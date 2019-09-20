@@ -7,6 +7,7 @@
 #include "cuda_runtime.h"
 #include "../headers/dev_array.h"
 #include "../headers/block_2d.h"
+#include <chrono>
 #include <stdlib.h>
 
 using namespace std;
@@ -30,13 +31,14 @@ void GPU_block_2d_fu(int n, int r, int* matrix) {
     //copy data to gpu
     dev_array<int> d_matrix(n*n);
     d_matrix.set(matrix, n*n);
+
+    auto start_hr = std::chrono::high_resolution_clock::now();
     for (int k = 0; k < n; k++) {
         block_2d_fu_kernel <<< blocksPerGrid, threadsPerBlock >>> (n, k, d_matrix.getData());
-        cudaDeviceSynchronize();
-        /*d_matrix.get(matrix, n*n);
-        cudaDeviceSynchronize();
-        d_matrix.set(matrix, n*n);
-        cudaDeviceSynchronize();*/
     }
+    auto end_hr = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end_hr - start_hr;
+    cout << fixed << diff.count() * 1000 << "(ms)" << endl;
+
     d_matrix.get(matrix, n*n);
 }

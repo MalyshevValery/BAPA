@@ -11,10 +11,10 @@
 
 //const bool DEBUG = true;
 //Размер тайла первого уровня
-#define R1 32
+#define R1 64
 
 //Размер тайла второго уровня
-#define R2 1
+#define R2 2
 
 #define INF INT32_MAX / 2
 

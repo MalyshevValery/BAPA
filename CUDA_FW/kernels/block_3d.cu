@@ -8,6 +8,7 @@
 #include "../headers/dev_array.h"
 #include "../headers/block_3d.h"
 #include <stdlib.h>
+#include <chrono>
 
 using namespace std;
 
@@ -68,10 +69,16 @@ void GPU_block_3d_fu(int n, int r, int *matrix) {
     //copy data to gpu
     dev_array<int> d_matrix(n * n);
     d_matrix.set(matrix, n * n);
+
+    auto start_hr = std::chrono::high_resolution_clock::now();
     for (int nk = 0; nk < nn; nk++) {
         I_block_3d_kernel << < I_blockPerGrid, threadsPerBlock >> > (n, nk * r, (nk + 1) * r, d_matrix.getData());
         SD_block_3d_kernel << < SD_blockPerGrid, threadsPerBlock >> > (n, nk, r, d_matrix.getData());
         DD_block_3d_kernel << < DD_blockPerGrid, threadsPerBlock >> > (n, nk, r, d_matrix.getData());
     }
+    auto end_hr = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end_hr - start_hr;
+    cout << fixed << diff.count() * 1000 << "(ms)" << endl;
+
     d_matrix.get(matrix, n * n);
 }
