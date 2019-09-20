@@ -86,15 +86,16 @@ int main(int argc, char** argv)
         cout << "3D block FU... ";
         GPU_block_3d_fu(n, r, matrix);
     }
-    else if (strcmp(type.c_str(), "block_t2") == 0) {
-        cout << "3D block FU with 2level tailing... ";
-        int r2_2 = (prop->maxThreadsPerBlock) / r / r;
+    else if (strcmp(type.c_str(), "block_3d_t2") == 0) {
+        cout << "3D block FU with 2nd level tailing... " << endl;
+        int r2_2 = r*r / (prop->maxThreadsPerBlock);
         int r2 = sqrt(r2_2);
         if (r2 * r2 != r2_2){
             cout << "Can't get integer size of second level tailing" << endl;
             return -1;
         }
-        GPU_block_3d_t2_fu(n, r, r2, matrix);
+        cout << "2nd level tailing size: " << r2 << endl;
+        GPU_block_3d_t2_fu(n, r / r2, r2, matrix);
     }
     else{
         cout << "No such type" << endl;
