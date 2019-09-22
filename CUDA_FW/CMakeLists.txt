@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.14)
 
+add_definitions(-DR=64)
+#add_definitions(-DI_NOT_SHARED)
+
 # Compilers for CUDA
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_C_COMPILER /usr/bin/gcc-6)
@@ -18,7 +21,6 @@ if(NOT DEFINED CMAKE_CUDA_STANDARD)
     set(CMAKE_CUDA_STANDARD 11)
     set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 endif()
-
 
 #Executables for projects
 add_executable(CUDA_FW cuda_fw.cu headers/dev_array.h headers/block_2d.h kernels/block_2d.cu headers/block_3d.h kernels/block_3d.cu headers/block_3d_t2.h kernels/block_3d_t2.cu)
