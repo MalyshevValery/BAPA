@@ -5,6 +5,6 @@
 #ifndef GRAPHGEN_BLOCK_3D_T2_H
 #define GRAPHGEN_BLOCK_3D_T2_H
 
-void GPU_block_3d_t2_fu(int n, int r, int r2, int*);
+void GPU_block_3d_t2_fu(int n, int r, int*);
 
 #endif //GRAPHGEN_BLOCK_3D_T2_H

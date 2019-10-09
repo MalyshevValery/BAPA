@@ -89,15 +89,10 @@ int main(int argc, char** argv)
     }
     else if (strcmp(type.c_str(), "block_3d_t2") == 0) {
         cout << "3D block FU with 2nd level tailing... " << endl;
-        int r2_2 = r*r / (prop->maxThreadsPerBlock);
-        int r2 = sqrt(r2_2);
-        if (r2 * r2 != r2_2){
-            cout << "Can't get integer size of second level tailing" << endl;
-            return -1;
-        }
-        cout << "2nd level tailing size: " << r2 << endl;
-        cout << "3D block FU with 2nd level tailing... ";
-        GPU_block_3d_t2_fu(n, r / r2, r2, matrix);
+        cout << "For shared memory compilation parameter is used:" << endl;
+        cout << "Block size " << R << endl;
+        int r = (int)sqrt(prop->maxThreadsPerBlock);
+        GPU_block_3d_t2_fu(n, r, matrix);
     }
     else{
         cout << "No such type" << endl;

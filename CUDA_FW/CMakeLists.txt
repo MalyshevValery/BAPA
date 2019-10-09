@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-add_definitions(-DR=64)
+add_definitions(-DR=32)
 #add_definitions(-DI_NOT_SHARED)
 
 # Compilers for CUDA
