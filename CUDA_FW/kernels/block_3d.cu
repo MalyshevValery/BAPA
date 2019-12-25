@@ -13,8 +13,8 @@
 using namespace std;
 
 __global__ void I_block_3d_kernel(int n, int k_start, int k_end, int *matrix) {
-    int ROW = threadIdx.y;
-    int COL = threadIdx.x;
+    int ROW = threadIdx.y + k_start;
+    int COL = threadIdx.x + k_start;
 
     for (int k = k_start; k < k_end; k++) {
         matrix[ROW * n + COL] = min(matrix[ROW * n + COL], matrix[ROW * n + k] + matrix[k * n + COL]);

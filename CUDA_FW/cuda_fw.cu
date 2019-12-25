@@ -23,17 +23,14 @@ int main(int argc, char** argv)
         cout << "No output file";
     else if (argc < 4)
         cout << "No type";
-    else if (argc < 5)
-        cout << "No block_size";
-
-    if (argc < 5)
-        return 1;
 
     struct timespec start, finish;
     double elapsed;
     cout.precision(3);
     string type = argv[3];
-    int r = stoi(string(argv[4]));
+    int r = 1;
+    if (argc == 5)
+        r = stoi(string(argv[4]));
     ifstream fin(argv[1]);
     int n;
     fin >> n;
@@ -91,8 +88,9 @@ int main(int argc, char** argv)
         cout << "3D block FU with 2nd level tailing... " << endl;
         cout << "For shared memory compilation parameter is used:" << endl;
         cout << "Block size " << R << endl;
-        int r = (int)sqrt(prop->maxThreadsPerBlock);
-        GPU_block_3d_t2_fu(n, r, matrix);
+
+        cout << "Tailing2 size: " << R2 << endl;
+        GPU_block_3d_t2_fu(n, matrix);
     }
     else{
         cout << "No such type" << endl;

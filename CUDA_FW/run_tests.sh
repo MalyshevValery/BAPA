@@ -10,16 +10,17 @@ echo "Graph size: " $1
 
 echo "Graph load: " $2
 
-"${DIR_WITH_EXE}GraphGen" $1 $2 "graph.txt"
+"${DIR_WITH_EXE}GraphGen" $1 $2 "graph_t.txt"
 
 echo "Times: " $3
 echo "Run file: " $4
 echo "Algorithm type: " $5
 echo "Block size: " $6
 
+
 for ((i=1; i<=$3; i++))
 do
     echo ""
     echo "Run: " $i
-    "${DIR_WITH_EXE}${4}" "graph.txt" "answer.txt" $5 $6
+    "${DIR_WITH_EXE}${4}" "graph_t.txt" "answer_t.txt" $5 $6
 done
